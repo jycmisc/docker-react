@@ -9,3 +9,15 @@ before_install:
 # CI=true https://facebook.github.io/create-react-app/docs/running-tests#linux-macos-bash
 script:
   - docker run -e CI=true fdsasa/docker-react npm run test
+
+deploy:
+  provider: elasticbeanstalk
+  region: "us-east-2"
+  app: "docker"
+  env: "Dockerreact-env"
+  bucket_name: "elasticbeanstalk-us-east-2-801239132568"
+  bucket_path: "dockerreact"
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY
