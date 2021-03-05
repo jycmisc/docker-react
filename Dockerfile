@@ -1,4 +1,5 @@
-FROM node:alpine as builder
+# Tailor for AWS. FROM node:alpine as builder
+FROM node:alpine
 
 USER node
 RUN mkdir -p /home/node/app
@@ -9,4 +10,5 @@ COPY --chown=node:node ./ ./
 RUN npm run build
 
 FROM nginx
-COPY --from=builder /home/node/app/build /usr/share/nginx/html
+# Tailor for AWS. COPY --from=builder /home/node/app/build /usr/share/nginx/html
+COPY --from=0 /home/node/app/build /usr/share/nginx/html
